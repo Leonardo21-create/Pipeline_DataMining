@@ -168,11 +168,11 @@ Pruebas independientes de los modulos de backend (*smoke tests*):
 
 Las pestanas se desbloquean de forma secuencial para garantizar consistencia entre fases:
 
-1. **1. Entendimiento del Negocio:** Contexto del problema de deteccion de intrusiones, objetivo de negocio, objetivo de mineria de datos y criterios de exito.
-2. **2. Datos e Integracion:** Carga de CSV, validacion de esquema, vista previa (`head(50)`), grafica de balance de clases (`Normal` vs. `Ataque`) y demostracion interactiva de `inner`, `left`, `right` y `outer` join sobre `attack_cat`.
-3. **3. Preprocesamiento:** Seleccion de escalador (`standard` o `minmax`) y proporcion de prueba (`test_size`), resumen de limpieza y ahorro de memoria, tabla IQR/p99 y boxplots comparativos antes y despues del tope p99 (`dur` y `sbytes`).
-4. **4. Modelado:** Seleccion de algoritmo (**Regresion Logistica** o **K-Means**) y tecnica de validacion (**Hold-out** o **Stratified K-Fold**), con ajuste dinamico de hiperparametros (`C`, `max_iter`, `n_clusters`, `K`) y bitacora de ejecucion.
-5. **5. Evaluacion:** Historial comparativo de corridas, desglose de las 6 metricas (**Exactitud, Precision, Sensibilidad, Especificidad, F1-Score y AUC-ROC**, mas `Media ± Std` en K-Fold), Matriz de Confusion dinamica y Curva ROC comparativa.
+1. Entendimiento del Negocio:** Contexto del problema de deteccion de intrusiones, objetivo de negocio, objetivo de mineria de datos y criterios de exito.
+2. Datos e Integracion:** Carga de CSV, validacion de esquema, vista previa (`head(50)`), grafica de balance de clases (`Normal` vs. `Ataque`) y demostracion interactiva de `inner`, `left`, `right` y `outer` join sobre `attack_cat`.
+3. Preprocesamiento:** Seleccion de escalador (`standard` o `minmax`) y proporcion de prueba (`test_size`), resumen de limpieza y ahorro de memoria, tabla IQR/p99 y boxplots comparativos antes y despues del tope p99 (`dur` y `sbytes`).
+4. Modelado:** Seleccion de algoritmo (**Regresion Logistica** o **K-Means**) y tecnica de validacion (**Hold-out** o **Stratified K-Fold**), con ajuste dinamico de hiperparametros (`C`, `max_iter`, `n_clusters`, `K`) y bitacora de ejecucion.
+5. Evaluacion:** Historial comparativo de corridas, desglose de las 6 metricas (**Exactitud, Precision, Sensibilidad, Especificidad, F1-Score y AUC-ROC**, mas `Media ± Std` en K-Fold), Matriz de Confusion dinamica y Curva ROC comparativa.
 
 ### Decisiones tecnicas clave
 
