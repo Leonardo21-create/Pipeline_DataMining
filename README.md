@@ -167,18 +167,12 @@ Pruebas independientes de los modulos de backend:
 
 Las pestanas se desbloquean secuencialmente para garantizar consistencia:
 
-1. Entendimiento del Negocio:** Contexto del problema de deteccion de intrusiones, objetivo de negocio, objetivo de mineria de datos y criterios de exito.**
-2. Datos e Integracion:** Carga de CSV, validacion de esquema, vista previa (`head(50)`), grafica de balance de clases (`Normal` vs. `Ataque`) y demostracion interactiva de `inner`, `left`, `right` y `outer` join sobre `attack_cat`.**
-3. Preprocesamiento:** Seleccion de escalador (`standard` o `minmax`) y proporcion de prueba (`test_size`), resumen de limpieza y ahorro de memoria, tabla IQR/p99 y boxplots comparativos antes y despues del tope p99 (`dur` y `sbytes`).**
-4. Modelado:** Seleccion de algoritmo (**Regresion Logistica** o **K-Means**) y tecnica de validacion (**Hold-out** o **Stratified K-Fold**), con ajuste dinamico de hiperparametros (`C`, `max_iter`, `n_clusters`, `K`) y bitacora de ejecucion.**
-5. Evaluacion:** Historial comparativo de corridas, desglose de las 6 metricas (**Exactitud, Precision, Sensibilidad, Especificidad, F1-Score y AUC-ROC**, mas `Media ± Std` en K-Fold), Matriz de Confusion dinamica y Curva ROC comparativa.**
+1. Entendimiento del Negocio:**Contexto del problema de deteccion de intrusiones, objetivo de negocio, objetivo de mineria de datos y criterios de exito.**
+2. Datos e Integracion:**Carga de CSV, validacion de esquema, vista previa (`head(50)`), grafica de balance de clases (`Normal` vs. `Ataque`) y demostracion interactiva de `inner`, `left`, `right` y `outer` join sobre `attack_cat`.**
+3. Preprocesamiento:**Seleccion de escalador (`standard` o `minmax`) y proporcion de prueba (`test_size`), resumen de limpieza y ahorro de memoria, tabla IQR/p99 y boxplots comparativos antes y despues del tope p99 (`dur` y `sbytes`).**
+4. Modelado:**Seleccion de algoritmo (**Regresion Logistica** o **K-Means**) y tecnica de validacion (**Hold-out** o **Stratified K-Fold**), con ajuste dinamico de hiperparametros (`C`, `max_iter`, `n_clusters`, `K`) y bitacora de ejecucion.**
+5. Evaluacion:**Historial comparativo de corridas, desglose de las 6 metricas (**Exactitud, Precision, Sensibilidad, Especificidad, F1-Score y AUC-ROC**, mas `Media ± Std` en K-Fold), Matriz de Confusion dinamica y Curva ROC comparativa.**
 
-### Decisiones tecnicas clave
-
-- **Cero *data leakage* en Stratified K-Fold:** La validacion cruzada recibe `X_encoded` sin escalar y encapsula `(escalador, modelo)` dentro de un `sklearn.pipeline.Pipeline` independiente por *fold*.
-- **Evaluacion limpia de K-Means (`KMeansBinaryClassifier`):** El mapeo de cada cluster a su clase mayoritaria se aprende exclusivamente en `fit(X_train, y_train)`. Al ser no supervisado y no generar probabilidades calibradas, su `AUC-ROC` se reporta explicitamente como `N/A`.
-- **Visualizacion segura en PyQt5:** `src/plotting.py` usa exclusivamente `matplotlib.figure.Figure` orientado a objetos (sin `matplotlib.pyplot`) y destruye lienzos previos con `deleteLater()` para evitar fugas de RAM.
-- **Eficiencia de memoria:** Las columnas One-Hot usan `uint8` y las matrices escaladas conservan `float32`.
 
 ### Resultados de referencia (UNSW-NB15, `StandardScaler`)
 
