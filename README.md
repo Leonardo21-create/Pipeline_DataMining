@@ -126,7 +126,7 @@ Para consultar explicaciones detalladas sobre joins, imputacion de `service`, im
 
 ## Aplicacion completa: Modelado, Visualizacion e Interfaz PyQt5 (CRISP-DM)
 
-Sobre el pipeline base se construyo la aplicacion de escritorio en **PyQt5** siguiendo las 5 fases de **CRISP-DM**, con arquitectura modular y ejecucion en hilos secundarios (`QThread`) para evitar bloqueos de la interfaz.
+Se construyo la aplicacion de escritorio en **PyQt5** siguiendo las 5 fases de **CRISP-DM**, con arquitectura modular y ejecucion en hilos secundarios para evitar bloqueos de la interfaz.
 
 ### Modulos agregados
 
@@ -145,7 +145,6 @@ Proyecto_Final_Pipeline/
 
 ### Requisitos y ejecucion de la interfaz
 
-> **Nota de compatibilidad en Windows:** Usar **Python 3.12** (o 3.11) para el entorno virtual. En versiones mas recientes (Python 3.13+), `PyQt5` puede presentar errores de carga de DLL (`ImportError: DLL load failed while importing QtWidgets`).
 
 ```powershell
 # Crear entorno con Python 3.12 (si hay varias versiones instaladas)
@@ -156,7 +155,7 @@ py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe main.py
 ```
 
-Pruebas independientes de los modulos de backend (*smoke tests*):
+Pruebas independientes de los modulos de backend:
 
 ```powershell
 .\.venv\Scripts\python.exe src\preprocessing.py
@@ -166,13 +165,13 @@ Pruebas independientes de los modulos de backend (*smoke tests*):
 
 ### Flujo por pestanas (CRISP-DM)
 
-Las pestanas se desbloquean de forma secuencial para garantizar consistencia entre fases:
+Las pestanas se desbloquean secuencialmente para garantizar consistencia:
 
-1. Entendimiento del Negocio:** Contexto del problema de deteccion de intrusiones, objetivo de negocio, objetivo de mineria de datos y criterios de exito.
-2. Datos e Integracion:** Carga de CSV, validacion de esquema, vista previa (`head(50)`), grafica de balance de clases (`Normal` vs. `Ataque`) y demostracion interactiva de `inner`, `left`, `right` y `outer` join sobre `attack_cat`.
-3. Preprocesamiento:** Seleccion de escalador (`standard` o `minmax`) y proporcion de prueba (`test_size`), resumen de limpieza y ahorro de memoria, tabla IQR/p99 y boxplots comparativos antes y despues del tope p99 (`dur` y `sbytes`).
-4. Modelado:** Seleccion de algoritmo (**Regresion Logistica** o **K-Means**) y tecnica de validacion (**Hold-out** o **Stratified K-Fold**), con ajuste dinamico de hiperparametros (`C`, `max_iter`, `n_clusters`, `K`) y bitacora de ejecucion.
-5. Evaluacion:** Historial comparativo de corridas, desglose de las 6 metricas (**Exactitud, Precision, Sensibilidad, Especificidad, F1-Score y AUC-ROC**, mas `Media ± Std` en K-Fold), Matriz de Confusion dinamica y Curva ROC comparativa.
+1. Entendimiento del Negocio:** Contexto del problema de deteccion de intrusiones, objetivo de negocio, objetivo de mineria de datos y criterios de exito.**
+2. Datos e Integracion:** Carga de CSV, validacion de esquema, vista previa (`head(50)`), grafica de balance de clases (`Normal` vs. `Ataque`) y demostracion interactiva de `inner`, `left`, `right` y `outer` join sobre `attack_cat`.**
+3. Preprocesamiento:** Seleccion de escalador (`standard` o `minmax`) y proporcion de prueba (`test_size`), resumen de limpieza y ahorro de memoria, tabla IQR/p99 y boxplots comparativos antes y despues del tope p99 (`dur` y `sbytes`).**
+4. Modelado:** Seleccion de algoritmo (**Regresion Logistica** o **K-Means**) y tecnica de validacion (**Hold-out** o **Stratified K-Fold**), con ajuste dinamico de hiperparametros (`C`, `max_iter`, `n_clusters`, `K`) y bitacora de ejecucion.**
+5. Evaluacion:** Historial comparativo de corridas, desglose de las 6 metricas (**Exactitud, Precision, Sensibilidad, Especificidad, F1-Score y AUC-ROC**, mas `Media ± Std` en K-Fold), Matriz de Confusion dinamica y Curva ROC comparativa.**
 
 ### Decisiones tecnicas clave
 
