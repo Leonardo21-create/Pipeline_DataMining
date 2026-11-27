@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1180</width>
+    <height>780</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>UNSW-NB15 - Mineria de Datos (CRISP-DM)</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="layout_principal">
+    <item>
+     <widget class="QTabWidget" name="tab_crisp">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+
+      <!-- PESTANA 1: ENTENDIMIENTO DEL NEGOCIO -->
+      <widget class="QWidget" name="tab_negocio">
+       <attribute name="title">
+        <string>1. Entendimiento del Negocio</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_negocio">
+        <item>
+         <widget class="QTextBrowser" name="txt_negocio">
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+
+      <!-- PESTANA 2: ENTENDIMIENTO E INTEGRACION -->
+      <widget class="QWidget" name="tab_datos">
+       <attribute name="title">
+        <string>2. Datos e Integracion</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_datos">
+        <item>
+         <layout class="QHBoxLayout" name="layout_archivos">
+          <item>
+           <widget class="QLabel" name="lbl_train">
+            <property name="text">
+             <string>Train CSV:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txt_ruta_train">
+            <property name="text">
+             <string>data/UNSW_NB15_training-set.csv</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_buscar_train">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="maximumWidth">
+             <number>34</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_test">
+            <property name="text">
+             <string>Test CSV:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="txt_ruta_test">
+            <property name="text">
+             <string>data/UNSW_NB15_testing-set.csv</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_buscar_test">
+            <property name="text">
+             <string>...</string>
+            </property>
+            <property name="maximumWidth">
+             <number>34</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_cargar">
+            <property name="text">
+             <string>Cargar e Integrar</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <item>
+         <widget class="QLabel" name="lbl_resumen_datos">
+          <property name="text">
+           <string>Sin datos cargados. Presiona "Cargar e Integrar".</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <layout class="QHBoxLayout" name="layout_datos_medio" stretch="3,2">
+          <item>
+           <widget class="QGroupBox" name="grp_preview">
+            <property name="title">
+             <string>Vista previa del dataset integrado (primeras 50 filas)</string>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_preview">
+             <item>
+              <widget class="QTableWidget" name="tbl_preview">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="grp_clases">
+            <property name="title">
+             <string>Distribucion de clases (label)</string>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_clases">
+             <item>
+              <widget class="QWidget" name="widget_canvas_clases">
+               <layout class="QVBoxLayout" name="layout_canvas_clases"/>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+      <item>
+         <widget class="QGroupBox" name="grp_joins">
+          <property name="title">
+           <string>Demostracion de Joins (pd.merge sobre attack_cat)</string>
+          </property>
+          <property name="maximumHeight">
+           <number>190</number>
+          </property>
+          <layout class="QVBoxLayout" name="layout_grp_joins">
+           <item>
+            <layout class="QHBoxLayout" name="layout_joins_top" stretch="0,0,1">
+             <item>
+              <widget class="QLabel" name="lbl_join_tipo">
+               <property name="text">
+                <string>Tipo de Join:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cmb_join">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="minimumWidth">
+                <number>100</number>
+               </property>
+               <property name="maximumWidth">
+                <number>120</number>
+               </property>
+               <item>
+                <property name="text">
+                 <string>inner</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>left</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>right</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>outer</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="lbl_join_resumen">
+               <property name="text">
+                <string>-</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QTableWidget" name="tbl_join_muestra">
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+
+      <!-- PESTANA 3: PREPROCESAMIENTO -->
+      <widget class="QWidget" name="tab_preprocesamiento">
+       <attribute name="title">
+        <string>3. Preprocesamiento</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_prep">
+        <item>
+         <layout class="QHBoxLayout" name="layout_prep_controles">
+          <item>
+           <widget class="QLabel" name="lbl_escalador">
+            <property name="text">
+             <string>Escalador:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="cmb_escalador">
+            <item>
+             <property name="text">
+              <string>standard</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>minmax</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lbl_test_size">
+            <property name="text">
+             <string>Proporcion Test (Hold-out):</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="spn_test_size">
+            <property name="decimals">
+             <number>2</number>
+            </property>
+            <property name="minimum">
+             <double>0.100000000000000</double>
+            </property>
+            <property name="maximum">
+             <double>0.400000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.050000000000000</double>
+            </property>
+            <property name="value">
+             <double>0.200000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_preprocesar">
+            <property name="text">
+             <string>Ejecutar Limpieza, Transformacion y Escalado</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <item>
+         <layout class="QHBoxLayout" name="layout_prep_resumen" stretch="1,1">
+          <item>
+           <widget class="QGroupBox" name="grp_resumen_prep">
+            <property name="title">
+             <string>Resumen de Limpieza, Transformacion y Escalado</string>
+            </property>
+            <property name="maximumHeight">
+             <number>210</number>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_resumen_prep">
+             <item>
+              <widget class="QPlainTextEdit" name="txt_resumen_prep">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+               <property name="placeholderText">
+                <string>Ejecuta el preprocesamiento para ver nulos imputados, duplicados, ahorro de memoria y dimensiones finales.</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="grp_outliers_tabla">
+            <property name="title">
+             <string>Deteccion IQR y Tope p99 por Variable</string>
+            </property>
+            <property name="maximumHeight">
+             <number>210</number>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_outliers_tabla">
+             <item>
+              <widget class="QTableWidget" name="tbl_outliers">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <item>
+         <widget class="QGroupBox" name="grp_outliers_grafica">
+          <property name="title">
+           <string>Comparativo de Outliers: Antes vs. Despues del Tope p99</string>
+          </property>
+          <layout class="QVBoxLayout" name="layout_grp_outliers_grafica">
+           <item>
+            <widget class="QWidget" name="widget_canvas_outliers">
+             <layout class="QVBoxLayout" name="layout_canvas_outliers"/>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+
+      <!-- PESTANA 4: MODELADO -->
+      <widget class="QWidget" name="tab_modelado">
+       <attribute name="title">
+        <string>4. Modelado</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_modelado">
+        <item>
+         <widget class="QGroupBox" name="grp_config_modelo">
+          <property name="title">
+           <string>Configuracion de Algoritmo y Validacion</string>
+          </property>
+          <layout class="QFormLayout" name="form_modelado">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lbl_modelo">
+             <property name="text">
+              <string>Algoritmo:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="cmb_modelo">
+             <item>
+              <property name="text">
+               <string>Regresion Logistica</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>K-Means (No Supervisado)</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+
+           <item row="1" column="0">
+            <widget class="QLabel" name="lbl_validacion">
+             <property name="text">
+              <string>Tecnica de Validacion:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="cmb_validacion">
+             <item>
+              <property name="text">
+               <string>Hold-out</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Stratified K-Fold</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+
+           <item row="2" column="0">
+            <widget class="QLabel" name="lbl_folds">
+             <property name="text">
+              <string>Numero de Folds (K):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QSpinBox" name="spn_folds">
+             <property name="minimum">
+              <number>2</number>
+             </property>
+             <property name="maximum">
+              <number>10</number>
+             </property>
+             <property name="value">
+              <number>5</number>
+             </property>
+            </widget>
+           </item>
+
+           <item row="3" column="0">
+            <widget class="QLabel" name="lbl_c">
+             <property name="text">
+              <string>Regularizacion (C):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QDoubleSpinBox" name="spn_c">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>0.010000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>100.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.250000000000000</double>
+             </property>
+             <property name="value">
+              <double>1.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+
+           <item row="4" column="0">
+            <widget class="QLabel" name="lbl_max_iter">
+             <property name="text">
+              <string>Iteraciones maximas:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1">
+            <widget class="QSpinBox" name="spn_max_iter">
+             <property name="minimum">
+              <number>100</number>
+             </property>
+             <property name="maximum">
+              <number>5000</number>
+             </property>
+             <property name="singleStep">
+              <number>100</number>
+             </property>
+             <property name="value">
+              <number>1000</number>
+             </property>
+            </widget>
+           </item>
+
+           <item row="5" column="0">
+            <widget class="QLabel" name="lbl_clusters">
+             <property name="text">
+              <string>Clusters (K-Means):</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="1">
+            <widget class="QSpinBox" name="spn_clusters">
+             <property name="minimum">
+              <number>2</number>
+             </property>
+             <property name="maximum">
+              <number>10</number>
+             </property>
+             <property name="value">
+              <number>2</number>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QPushButton" name="btn_entrenar">
+          <property name="text">
+           <string>Entrenar y Evaluar Modelo</string>
+          </property>
+         </widget>
+        </item>
+
+        <item>
+         <widget class="QGroupBox" name="grp_log_modelo">
+          <property name="title">
+           <string>Registro de Entrenamiento</string>
+          </property>
+          <layout class="QVBoxLayout" name="layout_grp_log">
+           <item>
+            <widget class="QPlainTextEdit" name="txt_log_modelo">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+
+      <!-- PESTANA 5: EVALUACION Y COMPARACION -->
+      <widget class="QWidget" name="tab_evaluacion">
+       <attribute name="title">
+        <string>5. Evaluacion</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="layout_evaluacion">
+        <item>
+         <layout class="QHBoxLayout" name="layout_eval_top">
+          <item>
+           <widget class="QLabel" name="lbl_eval_info">
+            <property name="text">
+             <string>Selecciona una fila del historial para inspeccionar sus metricas y Matriz de Confusion.</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btn_limpiar_historial">
+            <property name="text">
+             <string>Limpiar historial</string>
+            </property>
+            <property name="maximumWidth">
+             <number>140</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <item>
+         <layout class="QHBoxLayout" name="layout_eval_tablas" stretch="3,2">
+          <item>
+           <widget class="QGroupBox" name="grp_historial">
+            <property name="title">
+             <string>Historial Comparativo de Corridas</string>
+            </property>
+            <property name="maximumHeight">
+             <number>210</number>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_historial">
+             <item>
+              <widget class="QTableWidget" name="tbl_historial">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+               <property name="selectionBehavior">
+                <enum>QAbstractItemView::SelectRows</enum>
+               </property>
+               <property name="selectionMode">
+                <enum>QAbstractItemView::SingleSelection</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="grp_metricas_actual">
+            <property name="title">
+             <string>Detalle de la Corrida Seleccionada</string>
+            </property>
+            <property name="maximumHeight">
+             <number>210</number>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_metricas">
+             <item>
+              <widget class="QTableWidget" name="tbl_metricas_actual">
+               <property name="editTriggers">
+                <set>QAbstractItemView::NoEditTriggers</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+
+        <item>
+         <layout class="QHBoxLayout" name="layout_eval_graficas" stretch="1,1">
+          <item>
+           <widget class="QGroupBox" name="grp_matriz">
+            <property name="title">
+             <string>Matriz de Confusion</string>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_matriz">
+             <item>
+              <widget class="QWidget" name="widget_canvas_matriz">
+               <layout class="QVBoxLayout" name="layout_canvas_matriz"/>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="grp_roc">
+            <property name="title">
+             <string>Curva ROC Comparativa</string>
+            </property>
+            <layout class="QVBoxLayout" name="layout_grp_roc">
+             <item>
+              <widget class="QWidget" name="widget_canvas_roc">
+               <layout class="QVBoxLayout" name="layout_canvas_roc"/>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+
+    <!-- BARRA DE ESTADO GLOBAL -->
+    <item>
+     <layout class="QHBoxLayout" name="layout_estado">
+      <item>
+       <widget class="QLabel" name="lbl_estado">
+        <property name="text">
+         <string>Listo.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QProgressBar" name="progress_bar">
+        <property name="maximumWidth">
+         <number>220</number>
+        </property>
+        <property name="value">
+         <number>0</number>
+        </property>
+        <property name="textVisible">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
